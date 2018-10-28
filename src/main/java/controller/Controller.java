@@ -14,10 +14,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import main.java.SQLiteHelper;
+import main.java.models.Task;
 
 import java.net.URL;
 import java.util.*;
@@ -35,31 +37,25 @@ public class Controller implements Initializable {
 
     private ObservableList<String> task_list = FXCollections.observableArrayList();
 
+    private SQLiteHelper mSqLiteHelper;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*for (int i = 0; i < 4; i++) {
-            Label item = new Label("title " + i);
-            task_list_view.getItems().add(item);
 
-            item.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    showPopup();
-                }
-            });
-        }*/
+        mSqLiteHelper = new SQLiteHelper();
+        mSqLiteHelper.connect();
+        mSqLiteHelper.createNewTable();
+
 
         task_list.addListener(new InvalidationListener() {
             @Override
-            public void invalidated(Observable observable) {
-                // list changed
-            }
+            public void invalidated(Observable observable) { /*list changed*/ }
         });
 
         task_list_view.setItems(task_list);
 
+        // item click listener
         task_list_view.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
             @Override
             public void handle(MouseEvent event) {
                 System.out.println(task_list_view.getSelectionModel().getSelectedIndices() + "");
@@ -69,12 +65,12 @@ public class Controller implements Initializable {
     }
 
 
-
-
     // onclick add button
     @FXML
-    void addDate(ActionEvent event) {
-        if (!task_name.getText().equals("")) {
+    void addData(ActionEvent event) {
+        String task = task_name.getText();
+        if (!task.equals("")) {
+            Task.save(task, mSqLiteHelper);
             task_list.add(task_name.getText());
             task_name.setText("");
         }
