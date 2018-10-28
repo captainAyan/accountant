@@ -14,7 +14,9 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/main/resource/view/sample.fxml"));
         primaryStage.setTitle("Ayan's Todo");
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/main/resource/style/style.css").toExternalForm());
+        primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(new Image("/main/resource/image/icon.png"));
         primaryStage.show();
