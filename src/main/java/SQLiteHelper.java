@@ -1,9 +1,6 @@
 package main.java;
 
-import main.java.models.Task;
-
 import java.sql.*;
-import java.util.ArrayList;
 
 public class SQLiteHelper {
 
@@ -35,53 +32,4 @@ public class SQLiteHelper {
         }
     }
 
-    // inserts tasks to database
-    public void insert(String task) {
-        String sql = "INSERT INTO tasks(task) VALUES(?)";
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, task);
-            pstmt.executeUpdate();
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-
-    // select all tasks
-    public ArrayList<Task> select() {
-        String sql = "SELECT id, task FROM tasks";
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-
-            ArrayList<Task> resArr = new ArrayList<Task>();
-
-            while (rs.next()) {
-                resArr.add(new Task(rs.getInt("id"), rs.getString("task")) );
-            }
-
-            return resArr;
-
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
-
-    public void delete(int id) {
-        String sql = "DELETE FROM tasks WHERE id = ?";
-
-        try {
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, id);
-            pstmt.executeUpdate();
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }

@@ -1,13 +1,20 @@
 package main.java.controller;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
-public class MainController implements Initializable {
+public class Controller implements Initializable {
 
     @FXML
     private Button ui_one;
@@ -21,29 +28,53 @@ public class MainController implements Initializable {
     @FXML
     private Button ui_four;
 
+    @FXML
+    private BorderPane borderPane;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ui_loader("fragment_ui_one");
+    }
 
-        // ui_one button click event
-        ui_one.setOnAction((m) -> {
-            System.out.println("Mouse pressed");
-        });
+    @FXML
+    void ui_one(MouseEvent event) {
+        ui_loader("fragment_ui_one");
+        change_button_color(ui_one);
+    }
 
-        // ui_one button click event
-        ui_two.setOnAction((m) -> {
-            System.out.println("Mouse pressed");
-        });
+    @FXML
+    void ui_two(MouseEvent event) {
+        ui_loader("fragment_ui_two");
+        change_button_color(ui_two);
+    }
 
-        // ui_one button click event
-        ui_three.setOnAction((m) -> {
-            System.out.println("Mouse pressed");
-        });
+    @FXML
+    void ui_three(MouseEvent event) {
+        ui_loader("fragment_ui_three");
+        change_button_color(ui_three);
+    }
 
-        // ui_one button click event
-        ui_four.setOnAction((m) -> {
-            System.out.println("Mouse pressed");
-        });
+    @FXML
+    void ui_four(MouseEvent event) {
+        ui_loader("fragment_ui_four");
+        change_button_color(ui_four);
+    }
 
+    private void ui_loader(String ui) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource(ui+".fxml"));
+            borderPane.setCenter(root);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void change_button_color(Button b) {
+        ui_one.setStyle("-fx-background-color: transparent; -fx-text-fill: #f0f0f0;");
+        ui_two.setStyle("-fx-background-color: transparent; -fx-text-fill: #f0f0f0;");
+        ui_three.setStyle("-fx-background-color: transparent; -fx-text-fill: #f0f0f0;");
+        ui_four.setStyle("-fx-background-color: transparent; -fx-text-fill: #f0f0f0;");
+        b.setStyle("-fx-background-color: #404040; -fx-text-fill: #f0f0f0;");
     }
 
 }
