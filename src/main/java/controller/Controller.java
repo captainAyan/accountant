@@ -62,7 +62,7 @@ public class Controller implements Initializable {
 
     private void ui_loader(String ui) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource(ui+".fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/main/resource/view/fragments/"+ui+".fxml"));
             borderPane.setCenter(root);
         } catch (IOException e) {
             e.printStackTrace();
