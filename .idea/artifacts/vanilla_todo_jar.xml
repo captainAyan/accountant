@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="vanilla_todo:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/vanilla_todo_jar</output-path>
+    <root id="archive" name="vanilla_todo.jar">
+      <element id="module-output" name="accountant" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/jfoenix-9.0.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/sqlite-jdbc-3.23.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
