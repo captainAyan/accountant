@@ -1,2 +1,4 @@
-# ayans_todo
-"# accountant" 
+# Store Manager Java
+Store Manager is light weight java Store Management software.
+
+![Screen Shot](https://github.com/captainAyan/accountant/blob/master/src/main/resource/image/screen-shot.png) 
